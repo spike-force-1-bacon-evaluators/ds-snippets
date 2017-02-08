@@ -1,0 +1,20 @@
+language: python
+
+python:
+  - "2.7"
+
+services:
+  - docker
+
+sudo: false
+
+before_install:
+  - docker build -t ds-snippets .
+
+script:
+  - docker run --rm --name ds-snippets-test ds-snippets /bin/bash -c "py.test --verbose --cov=src src/*/*.py"
+
+notifications:
+  on_success: always
+  email: false
+  slack: sf1-bacon:fXNEjRShCTHmorluLIpRPqGa
