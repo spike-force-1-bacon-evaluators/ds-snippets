@@ -23,7 +23,9 @@ def send_output(df):
     output.write_with_schema(df)
 
 if __name__ == "__main__":
+    query1 = "MATCH (t:Tweet) WHERE NOT (t)-->(:SentimentAnalysis) return t.id as IDComment, t.text as CReview, t.date as CDate"
+    query2 = "MATCH (t:Tweet)-->(r:Restaurant) WITH collect(t) as ts,r WHERE size(ts)>30 WITH r MATCH (a:SentimentAnalysis)<--(t:Tweet)-->(r) RETURN t.id as IDComments, t.text as CReviews, t.date as CDate, t.written_by as IDPerson, r.id as IDRestaurant, r.name as RName, r.followers as RFollowers a.class as Class"
     df = load_unclassified_tweets(
-        "MATCH (t:Tweet) WHERE NOT (t)-->(:SentimentAnalysis) return t.id as IDComment, t.text as CReview, t.date as CDate",
+        query1, #set here your query 1 or 2
         create_neo4j_connection(get_conn_string()))
     send_output(df)
