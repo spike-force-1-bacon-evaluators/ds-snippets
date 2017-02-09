@@ -13,7 +13,6 @@ def get_conn_string():
 def create_neo4j_connection(addr):
     return Graph(addr)
 
-
 def load_unclassified_tweets(str,graph):
     df = DataFrame(graph.data(str))
     return df
@@ -25,9 +24,6 @@ def send_output(df):
 
 if __name__ == "__main__":
     df = load_unclassified_tweets(
-        "MATCH (t:Tweet) return t.id as IDComment, t.text as CReview, t.date as CDate",
+        "MATCH (t:Tweet) WHERE NOT (t)-->(:SentimentAnalysis) return t.id as IDComment, t.text as CReview, t.date as CDate",
         create_neo4j_connection(get_conn_string()))
     send_output(df)
-
-
- 

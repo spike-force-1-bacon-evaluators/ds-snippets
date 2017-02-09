@@ -10,7 +10,10 @@ RUN \
 
 RUN pip install \
     pytest \
-    pytest-cov
+    pytest-cov \
+    numpy \
+    py2neo \
+    pandas
 
 COPY . usr/src/ds-snippets/
 
