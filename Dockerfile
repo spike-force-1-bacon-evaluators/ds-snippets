@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM alesr/ds-bacon-base:latest
 
 RUN \
     apt-get update && \
