@@ -8,6 +8,10 @@ services:
 
 sudo: false
 
+branches:
+  except:
+  - master
+
 before_install:
   - docker build -t ds-snippets .
 
